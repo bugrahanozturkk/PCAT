@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //create schema
+
 const PhotoSchema = new Schema({
   title: String,
   description: String,
-  image: String,
+  Image: String,
   dateCreated: {
     type: Date,
     default: Date.now,
