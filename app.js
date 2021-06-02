@@ -3,13 +3,18 @@ const mongoose = require('mongoose');
 const ejs = require('ejs');
 const path = require('path');
 const Photo = require('./models/Photo');
-
+const fs = require('fs');
 const app = express();
+const fileUpload = require('express-fileupload');
+const methodOverride = require('method-override');
+const photoController = require('./controllers/photoControllers')
+const pageController = require('./controllers/pageController')
 
 //Connect DB
 mongoose.connect('mongodb://localhost/pcat-test-db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 //TEMPLATE ENGINE
@@ -19,25 +24,35 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(fileUpload());
+app.use(
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
+);
 
 // express static bir middleware(ara yazılım) fonksiyonudur.
 // req-res döngüsü içindeki her şey middleware'dir.
 
 // ROUTES
-app.get('/', async (req, res) => {
-  const photos = await Photo.find({})
-  res.render('index', {
-    photos
-  });
-});
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-app.get('/add', (req, res) => {
-  res.render('add');
-});
+app.get('/', photoController.getAllPhotos);
+
+app.get('/photos/:id', photoController.getPhoto);
+
+app.post('/photos', photoController.createPhoto);
+
+app.put('/photos/:id', photoController.updatePhoto);
+
+app.delete('/photos/:id', photoController.deletePhoto );
+
+app.get('/photos/edit/:id', pageController.getEditPage);
+
+app.get('/about', pageController.getAboutPage);
+
+app.get('/add', pageController.getAddPage);
+
 app.post('/photos', async (req, res) => {
-  await Photo.create(req.body)
+  await Photo.create(req.body);
   res.redirect('/');
 });
 
