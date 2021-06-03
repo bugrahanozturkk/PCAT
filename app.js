@@ -9,9 +9,10 @@ const fileUpload = require('express-fileupload');
 const methodOverride = require('method-override');
 const photoController = require('./controllers/photoControllers')
 const pageController = require('./controllers/pageController')
+const config = require('./config.json')
 
 //Connect DB
-mongoose.connect('mongodb+srv://bugrahanozturk:aEVsiQcfeH2PXTde@cluster0.ms137.mongodb.net/pcat-db?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
