@@ -22,7 +22,7 @@ mongoose.connect(config.mongoUrl, {
   console.log(err);
 })
 
-//TEMPLATE ENGINE
+///TEMPLATE ENGINE
 app.set('view engine', 'ejs');
 
 //MIDDLEWARES
