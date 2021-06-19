@@ -1,3 +1,11 @@
-Bu projemde statik olan bir görsel paylaşım sayfamızı dinamik hale getirerek yeni özellikler ekledim. 
-Projemde başlık ekleme, açıklama ekleme ve görsel ekleme özellikleri bulunmakta.
-Bunların yanı sıra yüklediğimiz postları düzenleme ve silme gibi özelliklerde mevcut.
+
+
+<h1>About</h1>
+<p>This project made to share image and image description.<p>
+
+
+<h2>Technologies</h2>
+ 
+<li>Express.JS</li>
+<li>MongoDB</li>
+<li>EJS</li>
